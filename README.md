@@ -1,4 +1,4 @@
-# vibium-wrapper-repro
+# vibium-cli-startup-repro
 
 Reproduction material for a proposed change to the `vibium` npm package: resolve
 `bin` to the platform binary at install time, instead of shipping a Node script
@@ -24,8 +24,8 @@ own machine's noise rather than trusting ours.
 Requires `python3`, `node`, `npm`, and an installed `vibium`. Two minutes.
 
 ```bash
-git clone https://github.com/lana-20/vibium-wrapper-repro
-cd vibium-wrapper-repro
+git clone https://github.com/lana-20/vibium-cli-startup-repro
+cd vibium-cli-startup-repro
 
 python3 measure.py 50 mine        # n=50, results written to results/n50_mine.json
 ```
