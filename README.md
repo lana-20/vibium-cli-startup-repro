@@ -134,7 +134,12 @@ turning a set of summaries into figures nobody could check.
 Saving 107.4–111.9ms (4.2% spread), ratio 11.61×–11.92× (2.7% spread). Sample
 size moves the estimate by 0.46%; sweep direction moves it by 2.8%.
 
-Measured on macOS x86_64, Node v25.8.0, against vibium `main` at VERSION 26.5.31.
+Measured on macOS x86_64 against vibium `main` at VERSION 26.5.31 — both recorded in
+each result file's `meta` block at measurement time. The Node version (v25.8.0) was
+**backfilled** on 2026-08-14 and is flagged `node_backfilled: true`: the harness that
+produced these runs did not capture it, and a stamp added afterwards is not the same
+thing as one taken at the time. `measure.py` records it live, so your own runs will not
+carry that flag.
 
 ## The patch
 

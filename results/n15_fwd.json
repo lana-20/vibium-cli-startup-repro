@@ -171,6 +171,9 @@
     "measured_at": "2026-08-14T20:44:43+00:00",
     "git_sha": "0c9c356",
     "fixture_source": "VibiumDev/vibium@main",
-    "measures": "proposed patch, not shipped code"
+    "measures": "proposed patch, not shipped code",
+    "node": "v25.8.0",
+    "node_backfilled": true,
+    "backfill_note": "node version added 2026-08-14 from the machine that produced these runs; the harness that generated them did not record it. Captured-at-measurement fields in this block are not marked backfilled."
   }
 }
