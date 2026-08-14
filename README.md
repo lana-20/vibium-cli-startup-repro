@@ -9,7 +9,7 @@ GitHub token, or any third-party Python package.
 
 **The claim:** every `vibium <verb>` currently costs two process spawns — Node
 boots, resolves a path, then execs the real binary. That is a near-constant
-~107ms, and it is avoidable. On our hardware, removing it takes a `vibium paths`
+~110ms, and it is avoidable. On our hardware, removing it takes a `vibium paths`
 call from ~118ms to ~10ms.
 
 **The honest caveat:** absolute numbers are hardware- and load-dependent. Expect
