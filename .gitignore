@@ -1,3 +1,10 @@
 __pycache__/
 *.pyc
 .DS_Store
+
+# Internal QA of this repo's own prose. Useful while writing it, noise for
+# anyone here to reproduce a measurement or evaluate the patch -- neither
+# measure.py, verify.py nor test_guards.py depends on any of it.
+verify_readme.py
+record_evidence.py
+EVIDENCE.md
