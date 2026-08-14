@@ -151,8 +151,23 @@ Both guard paths are tested, not just the happy one.
 
 ## Context
 
-Full write-up, including journey-level measurements and the risks:
+**Full write-up**, including the journey-level measurements and the risks:
 https://daisyladybug.com/blog/making-vibium-cli-faster/
 
-Not affiliated with the Vibium project. Filed in the spirit of "here is the
+**Where this came from.** The write-up was posted to LinkedIn on 2026-08-13:
+https://www.linkedin.com/feed/update/urn:li:activity:7493779001782530048/
+
+In the comments, Jason Huggins wrote: *"we should probably file 'skip the wrapper'
+as an enhancement/bug and fix that directly. thanks for running the analysis!"* —
+which is why this repo exists. It is a request to file, not an endorsement of the
+particular patch here; the patch and its risks are mine to defend.
+
+The same thread produced a correction worth repeating: Jim Evans pointed out that
+tagging subscriptions with the channel that created them is a **Chromium** extension
+(`goog:channel`), not something WebDriver BiDi requires, and that Firefox's current
+BiDi does not carry the field. The article has been corrected. It does not affect
+anything measured here — this repo times process startup, not protocol behaviour —
+but it is the reason the write-up now scopes its subscription findings to Chromium.
+
+Not affiliated with the Vibium project. Offered in the spirit of "here is the
 measurement, here is the patch, here is how to check both."
