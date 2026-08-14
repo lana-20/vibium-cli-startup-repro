@@ -13,9 +13,32 @@ boots, resolves a path, then execs the real binary. That is a near-constant
 call from ~118ms to ~10ms.
 
 **The honest caveat:** absolute numbers are hardware- and load-dependent. Expect
-different milliseconds. The **ratio** (~11.6×–11.9× on this probe) is the portable
-part, and the method below is designed so you can check the effect against your
-own machine's noise rather than trusting ours.
+different milliseconds.
+
+**And a second, more important one: there is no AUT here.** The probe is
+`vibium paths`, which prints resolved paths and drives no page at all — no browser
+work, no network, no site. That is deliberate: it isolates the constant with nothing
+else moving. But it also means **~92% of that call is Node boot**, so the 11.8× ratio
+is close to the best case this change can ever look like.
+
+**Do not quote 11.8× as a real-world speedup.** This project has already retracted one
+figure for precisely this mistake — `vibium pipe` measured 55–180× faster on a trivial
+`1+1` eval and lost on every real journey. The rule that came out of it: *a benchmark
+where fixed overhead is ~100% of the work measures the overhead, not the tool.*
+`vibium paths` is such a benchmark.
+
+**The real-world figure is journey-level**, measured against actual sites:
+
+| profile | site | commands | saving |
+|---|---|---|---|
+| `flat` | automation-exercise.daisyladybug.com | 6 | **405 ± 28ms (1.33×)** |
+| `navheavy` | saucedemo.com | 7 | **691 ± 26ms (1.69×)** |
+
+Those runs are not reproduced here — they need the sites up and take far longer — so
+this repo checks the *constant*, and the write-up linked at the bottom carries the
+journeys. **Quote 1.33×–1.69×, or ~110ms per command, not 11.8×.** The per-command
+constant is real, but it only bites at positions where the page is not already making
+you wait.
 
 ---
 
@@ -106,7 +129,7 @@ what caught it.
 
 | path | what it is |
 |---|---|
-| `measure.py` | the harness. Run it. |
+| `measure.py` | the harness. Run it. Probe is `vibium paths` — no AUT, no page. |
 | `verify.py` | recomputes our published figures from raw per-rep data |
 | `patch/postinstall.diff` | the proposed change, as a unified diff against `main` |
 | `results/*.json` | our runs: n=15/50/100, each sweep also run in reverse, plus one replication |
