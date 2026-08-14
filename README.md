@@ -174,5 +174,10 @@ BiDi does not carry the field. The article has been corrected. It does not affec
 anything measured here — this repo times process startup, not protocol behaviour —
 but it is the reason the write-up now scopes its subscription findings to Chromium.
 
+**Licence.** MIT — see `LICENSE`. Deliberately permissive so the Vibium maintainers
+can lift the patch, the harness, or any part of it into an Apache-2.0 codebase without
+friction. That is the point of this repo; a licence that got in the way of it would be
+self-defeating.
+
 Not affiliated with the Vibium project. Offered in the spirit of "here is the
 measurement, here is the patch, here is how to check both."
