@@ -76,12 +76,20 @@ VIBIUM_PACKAGE_DIR=/path/to/node_modules/vibium python3 measure.py 50 mine
 ## Check our numbers without running anything
 
 ```bash
-python3 verify.py
+python3 verify.py         # figures vs the raw per-rep data
+python3 verify_readme.py  # this README vs the repo, 28 checks
 ```
 
-This recomputes every published figure from the stored per-rep data in
+`verify.py` recomputes every published figure from the stored per-rep data in
 `results/`. It does not trust the summary blocks — editing one by hand makes it
 fail. Verified by doing exactly that.
+
+`verify_readme.py` fact-checks this README: every number in it, every structural
+claim about the tooling, its internal consistency, and — live — vibium's current
+version and whether the patch still applies. It exists because a paragraph-by-
+paragraph audit found three places where this README contradicted itself or its
+own directory after the results were re-measured. Each of those three is now a
+named check, and each was verified to fail when the defect is reintroduced.
 
 ---
 
@@ -110,11 +118,12 @@ what caught it.
   all-A-then-all-B. Our first sweep ran n=15, then 50, then 100 in that order and
   appeared to show the saving growing with sample size. It wasn't: the machine was
   getting busier, and `n` was confounded with elapsed time. Re-running the sweep
-  in reverse separated them. The estimate is flat across n; the ~3ms difference
-  is machine state.
+  in reverse separated them, and the estimate is flat across n. (That reversal later
+  earned its keep a second time — see the withdrawn direction effect below.)
 - **Every rep is correctness-checked**, not just timed. stdout must match the
   shim's byte for byte and the exit code must match. A faster wrong answer is not
-  a saving. Across 380 reps here: **zero mismatches**.
+  a saving. Across 330 reps in `results/`, and 710 including `results/prior/`:
+  **zero mismatches, in every run of both sessions**.
 - **A noise floor is measured** by timing the *same* arm twice per rep. That is a
   control the change cannot possibly have affected, so it tells you what your
   machine produces when nothing happened. Across these six runs the saving is
@@ -133,10 +142,14 @@ what caught it.
 | `measure.py` | the harness. Run it. Probe is `vibium paths` — no AUT, no page. |
 | `verify.py` | recomputes our published figures from raw per-rep data |
 | `patch/postinstall.diff` | the proposed change, as a unified diff against `main` |
-| `results/*.json` | our runs: n=15/50/100, each sweep also run in reverse, plus one replication |
+| `results/*.json` | the current runs: n=15/50/100, each sweep also run in reverse |
+| `results/prior/` | the superseded first session, kept — see below |
 
-`results/` filenames: `n<N>_fwd` and `n<N>_rev` are the forward and reverse
-sweeps; `n50_run1` is an earlier independent n=50 kept as a replication check.
+`results/` filenames: `n<N>_fwd` and `n<N>_rev` are the forward and reverse sweeps.
+`results/prior/` holds the earlier session (including an extra `n50_run1`), kept
+rather than deleted because one of its claims failed to replicate and deleting it
+would have hidden that.
+
 The harness refuses to overwrite an existing result file — pass a label instead.
 That guard exists because an unlabelled re-run destroyed its own first pass here,
 turning a set of summaries into figures nobody could check.
