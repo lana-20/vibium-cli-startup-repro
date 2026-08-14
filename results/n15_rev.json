@@ -1,0 +1,176 @@
+{
+  "summary": {
+    "n_requested": 15,
+    "n_scored": 15,
+    "correctness_mismatches": 0,
+    "probe": "vibium paths",
+    "shim": {
+      "median": 121.9,
+      "mean": 122.1,
+      "stdev": 3.4,
+      "min": 116.6,
+      "max": 131.3
+    },
+    "patched": {
+      "median": 10.3,
+      "mean": 10.4,
+      "stdev": 0.5,
+      "min": 9.7,
+      "max": 11.9
+    },
+    "saving_median_ms": 111.6,
+    "saving_mean_ms": 111.7,
+    "ratio_median": 11.87,
+    "noise_floor_median_ms": 4.4,
+    "noise_floor_max_ms": 11.2,
+    "stdout_identical_every_rep": true,
+    "main_version": "26.5.31"
+  },
+  "per_rep": [
+    {
+      "rep": 1,
+      "order": "shim",
+      "shim_ms": 118.061,
+      "shim_ok": true,
+      "patched_ms": 10.012,
+      "patched_ok": true,
+      "shim_again_ms": 123.143
+    },
+    {
+      "rep": 2,
+      "order": "patched",
+      "patched_ms": 9.705,
+      "patched_ok": true,
+      "shim_ms": 121.398,
+      "shim_ok": true,
+      "shim_again_ms": 122.739
+    },
+    {
+      "rep": 3,
+      "order": "shim",
+      "shim_ms": 121.999,
+      "shim_ok": true,
+      "patched_ms": 11.232,
+      "patched_ok": true,
+      "shim_again_ms": 123.042
+    },
+    {
+      "rep": 4,
+      "order": "patched",
+      "patched_ms": 10.083,
+      "patched_ok": true,
+      "shim_ms": 126.21,
+      "shim_ok": true,
+      "shim_again_ms": 130.247
+    },
+    {
+      "rep": 5,
+      "order": "shim",
+      "shim_ms": 131.33,
+      "shim_ok": true,
+      "patched_ms": 10.408,
+      "patched_ok": true,
+      "shim_again_ms": 120.178
+    },
+    {
+      "rep": 6,
+      "order": "patched",
+      "patched_ms": 10.5,
+      "patched_ok": true,
+      "shim_ms": 122.275,
+      "shim_ok": true,
+      "shim_again_ms": 126.585
+    },
+    {
+      "rep": 7,
+      "order": "shim",
+      "shim_ms": 120.961,
+      "shim_ok": true,
+      "patched_ms": 11.874,
+      "patched_ok": true,
+      "shim_again_ms": 128.018
+    },
+    {
+      "rep": 8,
+      "order": "patched",
+      "patched_ms": 10.035,
+      "patched_ok": true,
+      "shim_ms": 121.873,
+      "shim_ok": true,
+      "shim_again_ms": 117.025
+    },
+    {
+      "rep": 9,
+      "order": "shim",
+      "shim_ms": 120.46,
+      "shim_ok": true,
+      "patched_ms": 10.187,
+      "patched_ok": true,
+      "shim_again_ms": 119.109
+    },
+    {
+      "rep": 10,
+      "order": "patched",
+      "patched_ms": 10.283,
+      "patched_ok": true,
+      "shim_ms": 122.967,
+      "shim_ok": true,
+      "shim_again_ms": 120.386
+    },
+    {
+      "rep": 11,
+      "order": "shim",
+      "shim_ms": 123.347,
+      "shim_ok": true,
+      "patched_ms": 10.208,
+      "patched_ok": true,
+      "shim_again_ms": 118.907
+    },
+    {
+      "rep": 12,
+      "order": "patched",
+      "patched_ms": 10.237,
+      "patched_ok": true,
+      "shim_ms": 116.593,
+      "shim_ok": true,
+      "shim_again_ms": 121.005
+    },
+    {
+      "rep": 13,
+      "order": "shim",
+      "shim_ms": 119.798,
+      "shim_ok": true,
+      "patched_ms": 10.391,
+      "patched_ok": true,
+      "shim_again_ms": 120.654
+    },
+    {
+      "rep": 14,
+      "order": "patched",
+      "patched_ms": 10.27,
+      "patched_ok": true,
+      "shim_ms": 119.746,
+      "shim_ok": true,
+      "shim_again_ms": 124.776
+    },
+    {
+      "rep": 15,
+      "order": "shim",
+      "shim_ms": 124.334,
+      "shim_ok": true,
+      "patched_ms": 10.575,
+      "patched_ok": true,
+      "shim_again_ms": 119.084
+    }
+  ],
+  "meta": {
+    "captured": true,
+    "vibium_version": "26.5.31",
+    "platform": "darwin-x86_64",
+    "python": "3.13.2",
+    "measured_at": "2026-08-14T20:43:37+00:00",
+    "git_sha": "0c9c356",
+    "fixture_source": "VibiumDev/vibium@main",
+    "measures": "proposed patch, not shipped code"
+  }
+}

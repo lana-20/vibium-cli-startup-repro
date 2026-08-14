@@ -1,0 +1,45 @@
+--- a/packages/vibium/postinstall.js
++++ b/packages/vibium/postinstall.js
+@@ -7,6 +7,7 @@
+ }
+ 
+ const { execFileSync } = require('child_process');
++const fs = require('fs');
+ const path = require('path');
+ const os = require('os');
+ 
+@@ -25,10 +26,34 @@
+   }
+ }
+ 
++
++function isYarn() {
++  const { npm_config_user_agent } = process.env;
++  return !!npm_config_user_agent && /\byarn\//.test(npm_config_user_agent);
++}
++
++function maybeReplaceShimWithBinary(vibiumPath) {
++  if (os.platform() === 'win32') return 'skipped: win32';
++  if (isYarn()) return 'skipped: yarn';
++  const shimPath = path.join(__dirname, 'bin', 'cli.js');
++  const tempPath = `${shimPath}.${process.pid}.tmp`;
++  try {
++    if (!fs.statSync(vibiumPath).isFile()) return 'skipped: binary not a file';
++    fs.linkSync(vibiumPath, tempPath);
++    fs.renameSync(tempPath, shimPath);
++    return 'linked';
++  } catch (err) {
++    try { fs.unlinkSync(tempPath); } catch {}
++    return `skipped: ${err.code || err.message}`;
++  }
++}
++
+ try {
+   const vibiumPath = getVibiumBinPath();
+   console.log('Installing Chrome for Testing...');
+   execFileSync(vibiumPath, ['install'], { stdio: 'inherit' });
++  const outcome = maybeReplaceShimWithBinary(vibiumPath);
++  if (outcome !== 'linked') console.log(`vibium: keeping the Node shim (${outcome})`);
+ } catch (error) {
+   console.warn('Warning: Failed to install browser:', error.message);
+   // Don't fail the install - user can run manually later
