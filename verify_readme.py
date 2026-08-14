@@ -127,6 +127,20 @@ check("TOOL", "fresh runs capture node live; prior are backfilled",
       and all(v["meta"].get("node_backfilled") for v in PRIOR.values()),
       "meta.node_backfilled absent in results/, present in results/prior/")
 
+print("\n5b. Self-referential and patch claims — added after the 2026-08-14 audit")
+_tg = (HERE / "test_guards.py")
+check("CLAIM", "'both guard paths are tested' is backed by a runnable test",
+      _tg.exists()
+      and "npm_config_user_agent" in _tg.read_text()      # the Yarn path
+      and "drop_binary" in _tg.read_text()                # the missing-binary path
+      and "Could not find vibium binary" in _tg.read_text(),
+      "test_guards.py exercises Yarn, missing-binary, and a happy-path control")
+diff = (HERE / "patch/postinstall.diff").read_text()
+check("CLAIM", "patch really uses linkSync + renameSync as described",
+      "linkSync" in diff and "renameSync" in diff, "both present in patch/postinstall.diff")
+check("CLAIM", "patch really guards Windows and Yarn as described",
+      "win32" in diff and "isYarn" in diff, "both guards present in the diff")
+
 print("\n6. EXTERNAL — re-checked live")
 try:
     ver = subprocess.run(["curl", "-fsSL", "https://raw.githubusercontent.com/VibiumDev/vibium/main/VERSION"],
@@ -142,6 +156,16 @@ try:
     check("EXTERNAL", "patch still applies cleanly to main", r.returncode == 0, r.stderr.strip()[:80] or "clean")
 except Exception as e:
     print(f"  skip [EXTERNAL] network checks unavailable: {e}")
+
+# Self-referential, and deliberately last: the README states how many checks this
+# file runs, and that number drifts the moment a check is added. It can only be
+# compared once the run is over -- an earlier version compared a partial count and
+# failed for arithmetic reasons of its own.
+stated = re.search(r"(\d+)\s+checks", README)
+total = checked + 1
+check("SELF", "the check count stated in the README matches this run",
+      bool(stated) and int(stated.group(1)) == total,
+      f"README says {stated.group(1) if stated else '?'}, this run has {total}")
 
 print(f"\n  {checked} checks, {'ALL PASS' if not fails else str(len(fails)) + ' FAILURE(S): ' + ', '.join(fails)}")
 sys.exit(1 if fails else 0)
