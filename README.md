@@ -18,10 +18,10 @@ different milliseconds.
 **And a second, more important one: there is no AUT here.** The probe is
 `vibium paths`, which prints resolved paths and drives no page at all — no browser
 work, no network, no site. That is deliberate: it isolates the constant with nothing
-else moving. But it also means **~92% of that call is Node boot**, so the 11.8× ratio
+else moving. But it also means **~92% of that call is Node boot**, so the ~11.6× ratio
 is close to the best case this change can ever look like.
 
-**Do not quote 11.8× as a real-world speedup.** This project has already retracted one
+**Do not quote ~11.6× as a real-world speedup.** This project has already retracted one
 figure for precisely this mistake — `vibium pipe` measured 55–180× faster on a trivial
 `1+1` eval and lost on every real journey. The rule that came out of it: *a benchmark
 where fixed overhead is ~100% of the work measures the overhead, not the tool.*
@@ -36,7 +36,7 @@ where fixed overhead is ~100% of the work measures the overhead, not the tool.*
 
 Those runs are not reproduced here — they need the sites up and take far longer — so
 this repo checks the *constant*, and the write-up linked at the bottom carries the
-journeys. **Quote 1.33×–1.69×, or ~110ms per command, not 11.8×.** The per-command
+journeys. **Quote 1.33×–1.69×, or ~110ms per command, not ~11.6×.** The per-command
 constant is real, but it only bites at positions where the page is not already making
 you wait.
 
@@ -60,10 +60,10 @@ vibium main VERSION 26.5.31 · fixtures from /usr/local/lib/node_modules/vibium
   shim    bin/cli.js -> a /usr/bin/env node script text executable
   patched bin/cli.js -> Mach-O 64-bit executable x86_64
 
-  shim    median   118.4 ms  (sd 1.9)
-  patched median    10.0 ms  (sd 0.3)
-  saving           108.4 ms   11.88x
-  noise floor        3.1 ms median, 13.9 max
+  shim    median   118.7 ms  (sd 2.7)
+  patched median    10.2 ms  (sd 0.3)
+  saving           108.5 ms   11.61x
+  noise floor        2.2 ms median, 10.0 max
   correctness    50/50 byte-identical, 0 mismatches
 ```
 
@@ -117,7 +117,8 @@ what caught it.
   a saving. Across 380 reps here: **zero mismatches**.
 - **A noise floor is measured** by timing the *same* arm twice per rep. That is a
   control the change cannot possibly have affected, so it tells you what your
-  machine produces when nothing happened. Our saving is ~37× that floor. If
+  machine produces when nothing happened. Across these six runs the saving is
+  40×–60× that floor. If
   yours isn't comfortably above it, the effect isn't there on your hardware and
   we'd like to know.
 - **Results are written to disk.** A figure with no stored output is one nobody
@@ -142,27 +143,38 @@ turning a set of summaries into figures nobody could check.
 
 ## Our results
 
-7 runs, 380 scored reps, 0 correctness mismatches.
+Re-measured fresh with the `measure.py` in this repo. 6 runs, 330 scored reps,
+**0 correctness mismatches**.
 
 | run | n | saving | ratio | noise floor |
 |---|---|---|---|---|
-| n15_fwd | 15 | 108.4ms | 11.92× | 3.0ms |
-| n50_fwd | 50 | 108.4ms | 11.88× | 3.1ms |
-| n100_fwd | 100 | 108.9ms | 11.92× | 2.9ms |
-| n15_rev | 15 | 111.6ms | 11.87× | 4.4ms |
-| n50_rev | 50 | 110.9ms | 11.61× | 2.2ms |
-| n100_rev | 100 | 111.9ms | 11.70× | 2.4ms |
-| n50_run1 | 50 | 107.4ms | 11.77× | 1.9ms |
+| n15_fwd | 15 | 109.4ms | 11.63× | 2.5ms |
+| n50_fwd | 50 | 108.5ms | 11.61× | 2.2ms |
+| n100_fwd | 100 | 108.0ms | 11.44× | 2.7ms |
+| n15_rev | 15 | 107.6ms | 11.33× | 1.8ms |
+| n50_rev | 50 | 109.3ms | 11.73× | 2.7ms |
+| n100_rev | 100 | 108.3ms | 11.59× | 2.4ms |
 
-Saving 107.4–111.9ms (4.2% spread), ratio 11.61×–11.92× (2.7% spread). Sample
-size moves the estimate by 0.46%; sweep direction moves it by 2.8%.
+Saving 107.6–109.4ms (1.7% spread), ratio 11.33×–11.73× (3.5% spread).
+Sample size moves the estimate by 1.28%.
 
-Measured on macOS x86_64 against vibium `main` at VERSION 26.5.31 — both recorded in
-each result file's `meta` block at measurement time. The Node version (v25.8.0) was
-**backfilled** on 2026-08-14 and is flagged `node_backfilled: true`: the harness that
-produced these runs did not capture it, and a stamp added afterwards is not the same
-thing as one taken at the time. `measure.py` records it live, so your own runs will not
-carry that flag.
+**A previous sweep is kept in `results/prior/`** — 7 more runs, 380 reps, also 0
+mismatches. Across both sessions: **13 runs, 710 reps, 0 mismatches, saving
+107.4–111.9ms, ratio 11.33×–11.92×.**
+
+**One claim from the earlier set did not replicate, and has been withdrawn.** Those runs
+showed the reverse sweep landing ~2.9ms above the forward sweep, and this README used to
+explain it as machine state. In the fresh set that offset is **−0.2ms** — no systematic
+direction effect. So the earlier +2.9ms was a property of that session, not of sweep
+order. The sweeps are still run in both directions, because that is what makes such an
+effect visible when it is real.
+
+Measured on macOS x86_64, Node v25.8.0, against vibium `main` at VERSION 26.5.31 — all
+three recorded in each result file's `meta` block **at measurement time**, since these
+runs were produced by the `measure.py` in this repo. The older set in `results/prior/`
+carries `node_backfilled: true` instead: the harness that produced those did not capture
+Node's version, and a stamp added afterwards is not the same thing as one taken at the
+time.
 
 ## The patch
 

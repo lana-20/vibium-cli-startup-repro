@@ -5,175 +5,164 @@
     "correctness_mismatches": 0,
     "probe": "vibium paths",
     "shim": {
-      "median": 121.9,
-      "mean": 122.1,
-      "stdev": 3.4,
-      "min": 116.6,
-      "max": 131.3
+      "median": 118.1,
+      "mean": 118.7,
+      "stdev": 2.0
     },
     "patched": {
-      "median": 10.3,
-      "mean": 10.4,
-      "stdev": 0.5,
-      "min": 9.7,
-      "max": 11.9
+      "median": 10.4,
+      "mean": 10.6,
+      "stdev": 0.5
     },
-    "saving_median_ms": 111.6,
-    "saving_mean_ms": 111.7,
-    "ratio_median": 11.87,
-    "noise_floor_median_ms": 4.4,
-    "noise_floor_max_ms": 11.2,
-    "stdout_identical_every_rep": true,
+    "saving_median_ms": 107.6,
+    "ratio_median": 11.33,
+    "noise_floor_median_ms": 1.8,
+    "noise_floor_max_ms": 5.7,
     "main_version": "26.5.31"
   },
   "per_rep": [
     {
       "rep": 1,
-      "order": "shim",
-      "shim_ms": 118.061,
+      "first": "shim",
+      "shim_ms": 115.628,
       "shim_ok": true,
-      "patched_ms": 10.012,
+      "patched_ms": 10.865,
       "patched_ok": true,
-      "shim_again_ms": 123.143
+      "shim_again_ms": 121.345
     },
     {
       "rep": 2,
-      "order": "patched",
-      "patched_ms": 9.705,
+      "first": "patched",
+      "patched_ms": 9.984,
       "patched_ok": true,
-      "shim_ms": 121.398,
+      "shim_ms": 118.064,
       "shim_ok": true,
-      "shim_again_ms": 122.739
+      "shim_again_ms": 119.84
     },
     {
       "rep": 3,
-      "order": "shim",
-      "shim_ms": 121.999,
+      "first": "shim",
+      "shim_ms": 120.847,
       "shim_ok": true,
-      "patched_ms": 11.232,
+      "patched_ms": 9.982,
       "patched_ok": true,
-      "shim_again_ms": 123.042
+      "shim_again_ms": 121.307
     },
     {
       "rep": 4,
-      "order": "patched",
-      "patched_ms": 10.083,
+      "first": "patched",
+      "patched_ms": 10.259,
       "patched_ok": true,
-      "shim_ms": 126.21,
+      "shim_ms": 118.192,
       "shim_ok": true,
-      "shim_again_ms": 130.247
+      "shim_again_ms": 116.918
     },
     {
       "rep": 5,
-      "order": "shim",
-      "shim_ms": 131.33,
+      "first": "shim",
+      "shim_ms": 118.849,
       "shim_ok": true,
-      "patched_ms": 10.408,
+      "patched_ms": 10.418,
       "patched_ok": true,
-      "shim_again_ms": 120.178
+      "shim_again_ms": 117.954
     },
     {
       "rep": 6,
-      "order": "patched",
-      "patched_ms": 10.5,
+      "first": "patched",
+      "patched_ms": 10.087,
       "patched_ok": true,
-      "shim_ms": 122.275,
+      "shim_ms": 117.208,
       "shim_ok": true,
-      "shim_again_ms": 126.585
+      "shim_again_ms": 120.142
     },
     {
       "rep": 7,
-      "order": "shim",
-      "shim_ms": 120.961,
+      "first": "shim",
+      "shim_ms": 117.286,
       "shim_ok": true,
-      "patched_ms": 11.874,
+      "patched_ms": 11.454,
       "patched_ok": true,
-      "shim_again_ms": 128.018
+      "shim_again_ms": 121.173
     },
     {
       "rep": 8,
-      "order": "patched",
-      "patched_ms": 10.035,
+      "first": "patched",
+      "patched_ms": 10.998,
       "patched_ok": true,
-      "shim_ms": 121.873,
+      "shim_ms": 120.135,
       "shim_ok": true,
-      "shim_again_ms": 117.025
+      "shim_again_ms": 120.905
     },
     {
       "rep": 9,
-      "order": "shim",
-      "shim_ms": 120.46,
+      "first": "shim",
+      "shim_ms": 117.398,
       "shim_ok": true,
-      "patched_ms": 10.187,
+      "patched_ms": 10.298,
       "patched_ok": true,
-      "shim_again_ms": 119.109
+      "shim_again_ms": 122.762
     },
     {
       "rep": 10,
-      "order": "patched",
-      "patched_ms": 10.283,
+      "first": "patched",
+      "patched_ms": 11.261,
       "patched_ok": true,
-      "shim_ms": 122.967,
+      "shim_ms": 117.558,
       "shim_ok": true,
-      "shim_again_ms": 120.386
+      "shim_again_ms": 120.339
     },
     {
       "rep": 11,
-      "order": "shim",
-      "shim_ms": 123.347,
+      "first": "shim",
+      "shim_ms": 122.473,
       "shim_ok": true,
-      "patched_ms": 10.208,
+      "patched_ms": 10.141,
       "patched_ok": true,
-      "shim_again_ms": 118.907
+      "shim_again_ms": 117.134
     },
     {
       "rep": 12,
-      "order": "patched",
-      "patched_ms": 10.237,
+      "first": "patched",
+      "patched_ms": 11.154,
       "patched_ok": true,
-      "shim_ms": 116.593,
+      "shim_ms": 116.933,
       "shim_ok": true,
-      "shim_again_ms": 121.005
+      "shim_again_ms": 115.607
     },
     {
       "rep": 13,
-      "order": "shim",
-      "shim_ms": 119.798,
+      "first": "shim",
+      "shim_ms": 117.149,
       "shim_ok": true,
-      "patched_ms": 10.391,
+      "patched_ms": 10.514,
       "patched_ok": true,
-      "shim_again_ms": 120.654
+      "shim_again_ms": 115.324
     },
     {
       "rep": 14,
-      "order": "patched",
-      "patched_ms": 10.27,
+      "first": "patched",
+      "patched_ms": 10.885,
       "patched_ok": true,
-      "shim_ms": 119.746,
+      "shim_ms": 120.156,
       "shim_ok": true,
-      "shim_again_ms": 124.776
+      "shim_again_ms": 118.852
     },
     {
       "rep": 15,
-      "order": "shim",
-      "shim_ms": 124.334,
+      "first": "shim",
+      "shim_ms": 122.636,
       "shim_ok": true,
-      "patched_ms": 10.575,
+      "patched_ms": 10.153,
       "patched_ok": true,
-      "shim_again_ms": 119.084
+      "shim_again_ms": 120.626
     }
   ],
   "meta": {
-    "captured": true,
-    "vibium_version": "26.5.31",
+    "measured_at": "2026-08-14T23:16:55+00:00",
     "platform": "darwin-x86_64",
     "python": "3.13.2",
-    "measured_at": "2026-08-14T20:43:37+00:00",
-    "git_sha": "0c9c356",
-    "fixture_source": "VibiumDev/vibium@main",
-    "measures": "proposed patch, not shipped code",
     "node": "v25.8.0",
-    "node_backfilled": true,
-    "backfill_note": "node version added 2026-08-14 from the machine that produced these runs; the harness that generated them did not record it. Captured-at-measurement fields in this block are not marked backfilled."
+    "vibium_main_version": "26.5.31",
+    "measures": "a proposed patch, not shipped code"
   }
 }
