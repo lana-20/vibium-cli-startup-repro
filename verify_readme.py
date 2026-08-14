@@ -40,6 +40,21 @@ PRIOR = {f.stem: json.loads(f.read_text()) for f in (HERE / "results/prior").glo
 fails, checked = [], 0
 
 
+def blocks(md):
+    out, cur, fence = [], [], False
+    for line in md.split("\n"):
+        if line.startswith("```"):
+            fence = not fence
+        if not line.strip() and not fence:
+            if cur:
+                out.append("\n".join(cur)); cur = []
+        else:
+            cur.append(line)
+    if cur:
+        out.append("\n".join(cur))
+    return out
+
+
 def check(kind, label, cond, evidence=""):
     global checked
     checked += 1
@@ -135,6 +150,16 @@ check("CLAIM", "'both guard paths are tested' is backed by a runnable test",
       and "drop_binary" in _tg.read_text()                # the missing-binary path
       and "Could not find vibium binary" in _tg.read_text(),
       "test_guards.py exercises Yarn, missing-binary, and a happy-path control")
+_ev = HERE / "EVIDENCE.md"
+_nblocks = len(blocks(README)) if "blocks" in dir() else None
+check("SELF", "README does not hard-code a block count that EVIDENCE.md owns",
+      not re.search(r"README's \d+\s*\n?blocks", README) and not re.search(r"\d+ blocks in README", README),
+      "the count lives in EVIDENCE.md only -- two copies of a figure is two things to keep in sync")
+check("SELF", "EVIDENCE.md exists and its block count matches this README",
+      _ev.exists() and (lambda m: bool(m) and int(m.group(1)) == len(blocks(README)))(
+          re.search(r"(\d+) blocks in README", _ev.read_text())),
+      f"{len(blocks(README))} blocks now")
+
 diff = (HERE / "patch/postinstall.diff").read_text()
 check("CLAIM", "patch really uses linkSync + renameSync as described",
       "linkSync" in diff and "renameSync" in diff, "both present in patch/postinstall.diff")
