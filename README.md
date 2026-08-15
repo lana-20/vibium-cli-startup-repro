@@ -138,6 +138,7 @@ what caught it.
 |---|---|
 | `measure.py` | the harness. Run it. Probe is `vibium paths` — no AUT, no page. |
 | `verify.py` | recomputes our published figures from raw per-rep data |
+| `test_guards.py` | exercises the patch's fallback paths — Yarn, missing binary, and a control |
 | `patch/postinstall.diff` | the proposed change, as a unified diff against `main` |
 | `results/*.json` | the current runs: n=15/50/100, each sweep also run in reverse |
 | `results/prior/` | the superseded first session, kept — see below |
