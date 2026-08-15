@@ -34,6 +34,9 @@ where fixed overhead is ~100% of the work measures the overhead, not the tool.*
 | `flat` | automation-exercise.daisyladybug.com | 6 | **405 ± 28ms (1.33×)** |
 | `navheavy` | saucedemo.com | 7 | **691 ± 26ms (1.69×)** |
 
+Command counts are the measured journey (plus a 3-step reset, reported apart) —
+so a re-run shows more `vibium` invocations per rep than the column states.
+
 Those runs are not reproduced here — they need the sites up and take far longer — so
 this repo checks the *constant*, and the write-up linked at the bottom carries the
 journeys. **Quote 1.33×–1.69×, or ~108ms per command, not ~11.6×.** The per-command
